@@ -1,0 +1,12 @@
+{
+    "projectName": "ContextMap",
+    "languages": [{
+        "id": "context-map",
+        "grammar": "src/language/context-map.langium",
+        "fileExtensions": [".mcml"],
+        "textMate": {
+            "out": "syntaxes/context-map.tmLanguage.json"
+        }
+    }],
+    "out": "src/language/generated"
+}

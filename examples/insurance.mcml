@@ -1,0 +1,27 @@
+/* Example Context Map written with 'ContextMapper DSL' */
+ContextMap InsuranceContextMap {
+	
+	/* Add bounded contexts to this context map: */
+	contains CustomerManagementContext
+	contains CustomerSelfServiceContext
+	contains PrintingContext
+	contains PolicyManagementContext
+	contains RiskManagementContext
+	contains DebtCollection
+	
+	/* Define the context relationships: */ 
+
+	CustomerSelfServiceContext [D,C]<-[U,S] CustomerManagementContext
+	
+	CustomerManagementContext [D,S,U]<-[U,S,D] PrintingContext
+	
+	PrintingContext [U,OHS,PL]->[D,ACL] PolicyManagementContext
+	
+	RiskManagementContext [P]<->[P] PolicyManagementContext
+
+	PolicyManagementContext [D,CF]<-[U,OHS,PL] CustomerManagementContext
+
+	DebtCollection [D,ACL]<-[U,OHS,PL] PrintingContext
+
+	PolicyManagementContext [SK]<->[SK] DebtCollection	
+}
