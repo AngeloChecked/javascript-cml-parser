@@ -4,7 +4,7 @@ import { expandToString as s } from "langium/generate";
 import { parseHelper } from "langium/test";
 import type { Diagnostic } from "vscode-languageserver-types";
 import { createContextMapServices } from "../../src/language/context-map-module.js";
-import { ContextMapModel as Model, isContextMapModel as isModel} from "../../src/language/generated/ast.js";
+import { ContextMap as Model, isContextMap as isModel} from "../../src/language/generated/ast.js";
 
 let services: ReturnType<typeof createContextMapServices>;
 let parse:    ReturnType<typeof parseHelper<Model>>;

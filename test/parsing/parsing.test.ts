@@ -3,7 +3,7 @@ import { EmptyFileSystem, type LangiumDocument } from "langium";
 import { expandToString as s } from "langium/generate";
 import { parseHelper } from "langium/test";
 import { createContextMapServices } from "../../src/language/context-map-module.js";
-import { Link, ContextMapModel as Model, Node, isContextMapModel as isModel} from "../../src/language/generated/ast.js";
+import { ContextMapLink as Link, ContextMap as Model, ContextMapNode as Node, isContextMap as isModel} from "../../src/language/generated/ast.js";
 
 let services: ReturnType<typeof createContextMapServices>;
 let parse:    ReturnType<typeof parseHelper<Model>>;
@@ -21,6 +21,8 @@ describe('Parsing tests', () => {
 
     test('parse simple model', async () => {
         document = await parse(`
+    context-map-beta
+
 /* Example Context Map written with 'ContextMapper DSL' */
         ContextMap InsuranceContextMap {
             
@@ -64,14 +66,14 @@ describe('Parsing tests', () => {
         Body:
           name: ${document.parseResult.value?.name}
           Nodes: 
-            ${document.parseResult.value?.body?.filter(n=>n.$type === "Node").map(rawNode => {
+            ${document.parseResult.value?.body?.filter(n=>n.$type === "ContextMapNode").map(rawNode => {
             return s`
             Node:
               name: ${(rawNode as Node).name}
             `;
             })?.join('\n')}
           Edges: 
-            ${document.parseResult.value?.body?.filter(n=>n.$type === "Link").map(rawLink => { 
+            ${document.parseResult.value?.body?.filter(n=>n.$type === "ContextMapLink").map(rawLink => { 
                 const link = rawLink as Link;
                 return s`
                 Edge:

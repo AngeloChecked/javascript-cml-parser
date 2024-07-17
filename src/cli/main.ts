@@ -1,4 +1,4 @@
-import type { ContextMapModel } from '../language/generated/ast.js';
+import type { ContextMap } from '../language/generated/ast.js';
 import chalk from 'chalk';
 import { Command } from 'commander';
 import { ContextMapLanguageMetaData } from '../language/generated/module.js';
@@ -16,7 +16,7 @@ const packageContent = await fs.readFile(packagePath, 'utf-8');
 
 export const generateAction = async (fileName: string, opts: GenerateOptions): Promise<void> => {
     const services = createContextMapServices(NodeFileSystem).ContextMap;
-    const model = await extractAstNode<ContextMapModel>(fileName, services);
+    const model = await extractAstNode<ContextMap>(fileName, services);
     const generatedFilePath = generateJavaScript(model, fileName, opts.destination);
     console.log(chalk.green(`JavaScript code generated successfully: ${generatedFilePath}`));
 };
